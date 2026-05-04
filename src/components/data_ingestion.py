@@ -1,9 +1,13 @@
 import os
 import sys
-from src.exception import CustomeException
+import pandas as pd
+
+from src.exception import CustomException
 from src.logger import logging
 
-import pandas as pd
+# from src.components.data_transformation import DataTransformation,DataTransformationConfig
+
+
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
@@ -23,6 +27,7 @@ class DataIntegestion:
         logging.info("Entered the data ingestion method or component")
         try:
             df = pd.read_csv("data\stud.csv")
+
             logging.info("Read the dataset as dataframe")
 
             os.makedirs(
@@ -46,9 +51,12 @@ class DataIntegestion:
                 self.ingestion_config.test_data_path,
             )
         except Exception as e:
-            raise CustomeException(e, sys)
+            raise CustomException(e, sys)
 
 
-if __name__ == "__main__":
-    obj = DataIntegestion()
-    obj.initiate_data_ingestion()
+# if __name__ == "__main__":
+#     obj = DataIntegestion()
+#     train_data, test_data = obj.initiate_data_ingestion()
+
+#     data_transformation = DataTransformation()
+#     data_transformation.initiate_data_transformation(train_data, test_data)
